@@ -16,7 +16,6 @@ import { SharedModule } from '../ng-zorro-config';//引入所有ngzorro套件
     ReactiveFormsModule,
     SharedModule,//ngzorro所有套件
     FormsModule,
-    
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
@@ -25,6 +24,7 @@ export class SearchComponent implements OnInit {
   // 定義
   searchForm!: FormGroup;
   dataList: DataInterface[] = [];
+  allDataList: DataInterface[] = [];
 
   // 下拉選單單位縣市、公所
   countyAndcity = ['台北', '台中', '高雄'];
@@ -56,13 +56,14 @@ export class SearchComponent implements OnInit {
   loadData(): void {
     this.dataService.getData().subscribe(data => {
       this.dataList = data;
+      this.allDataList = data;
     });
   }
 
   searchSubmit():void{
     if (this.searchForm.valid){
       const { unitName, office, account, name, enable } = this.searchForm.value;
-      this.dataList = this.dataList.filter(item =>
+      this.dataList = this.allDataList.filter(item =>
         (unitName ? item.unitName === unitName : true) &&
         (office ? item.office === office : true) &&
         (account ? item.account.includes(account) : true) &&

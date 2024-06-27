@@ -24,6 +24,7 @@ export class IndexComponent implements OnInit {
   searchForm!: FormGroup;
   dataList: DataInterface[] = [];
   accountforedit: string = '';
+  allDataList: DataInterface[] = [];
 
   // 下拉選單單位縣市、公所
   countyAndcity = ['台北', '台中', '高雄'];
@@ -56,6 +57,7 @@ export class IndexComponent implements OnInit {
   loadData(): void {
     this.dataService.getData().subscribe((data) => {
       this.dataList = data;
+      this.allDataList = data;
       // console.log(this.dataList)
       console.log(this.accountforedit);
     });
@@ -65,7 +67,7 @@ export class IndexComponent implements OnInit {
     const { unitName, office, account, name, enable } = this.searchForm.value;
 
     if (this.searchForm.valid) {
-      this.dataList = this.dataList.filter(
+      this.dataList = this.allDataList.filter(
         (item) =>
           (unitName ? item.unitName === unitName : true) &&
           (office ? item.office === office : true) &&
