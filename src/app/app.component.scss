@@ -1,0 +1,68 @@
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 1%;
+}
+
+.flex-container nz-form-control {
+    margin-right: 10px;
+
+}
+
+// 共用選單列
+.flex-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// 按鈕
+.flex-add {
+    margin-top: 1%;
+    text-align: right;
+}
+
+.orange-button {
+    background-color: #F2CD5C;
+    color: #fff;
+    border-color: #F2CD5C;
+}
+
+.orange-button:hover {
+    background-color: #FF8C00;
+    border-color: #FF8C00;
+}
+.blue-button {
+    background-color: #00495C;
+    color: #fff;
+    border-color: #00495C;
+}
+
+.blue-button:hover {
+    background-color: #007896;
+    border-color: #007896;
+}
+
+
+//   表單排版
+.addFormcss {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin: 1% 10% 1% 10%;
+    text-align: left;
+}
+.addFormcss nz-form-item{
+    margin-right: 5%;
+
+}
+//目前無資料框
+.nodata{
+    display: flex;
+    justify-content: center;
+    align-items:end;
+    margin-top: 5%;
+    // background-color: #F2CD5C;
+}

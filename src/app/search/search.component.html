@@ -1,0 +1,70 @@
+<div>
+  <form nz-form [formGroup]="searchForm" (ngSubmit)="searchSubmit()">
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>單位名稱</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="unitName" nzPlaceHolder="縣市">
+              <nz-option *ngFor="let p of countyAndcity" [nzValue]="p" [nzLabel]="p"></nz-option>
+            </nz-select>
+            <nz-select formControlName="office" nzPlaceHolder="公所">
+              <nz-option *ngFor="let c of office" [nzValue]="c" [nzLabel]="c"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>停用</nz-form-label>
+          <nz-form-control>
+            <nz-switch formControlName="enable" nzCheckedChildren="啟" nzUnCheckedChildren="停"></nz-switch>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>帳號</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="text" formControlName="account">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>姓名</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="text" formControlName="name">
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+    <div nz-row style="text-align: center;">
+      <div nz-col nzSpan="24">
+        <button nz-button type="submit" class="btn btn-success" [disabled]="searchForm.invalid">搜尋</button>
+        <button nz-button type="button" class="btn btn-secondary" (click)="onReset()">重置</button>
+      </div>
+    </div>
+    <br>
+  </form>
+  <nz-table ngSkipHydration nzTemplateMode>
+    <thead>
+      <tr>
+        <th nzAlign="center">單位名稱</th>
+        <th nzAlign="center">帳號</th>
+        <th nzAlign="center">姓名</th>
+        <th nzAlign="center">停用</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataList">
+        <td nzAlign="center">{{item.unitName}} {{item.office}}</td>
+        <td nzAlign="center">{{item.account}}</td>
+        <td nzAlign="center">{{item.name}}</td>
+        <td nzAlign="center">{{item.enable}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

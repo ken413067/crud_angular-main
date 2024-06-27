@@ -1,0 +1,90 @@
+<div class="searchnav">
+    <!-- 搜尋列 -->
+    <div nz-row>
+        <div nz-col nzSpan="23" class="flex-add">
+            <button nz-button class="orange-button" (click)="navigateToadd('')">新增</button>
+        </div>
+    </div>
+    <form nz-form [formGroup]="searchForm" (ngSubmit)="searchSubmit()">
+        <div nz-row class='flex-container'>
+            <div nz-col nzSpan="5">
+                <nz-form-item>
+                    <nz-form-label>單位名稱</nz-form-label>
+                    <nz-form-control>
+                        <div nz-col nzSpan="24" class='flex-select'>
+                            <nz-select formControlName="unitName" nzPlaceHolder="縣市">
+                                <nz-option *ngFor="let p of countyAndcity" [nzValue]="p" [nzLabel]="p"></nz-option>
+                            </nz-select>
+                            <nz-select formControlName="office" nzPlaceHolder="公所">
+                                <nz-option *ngFor="let c of office" [nzValue]="c" [nzLabel]="c"></nz-option>
+                            </nz-select>
+                        </div>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="5">
+                <nz-form-item>
+                    <nz-form-label>帳號</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input type="text" formControlName="account">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="5">
+                <nz-form-item>
+                    <nz-form-label>姓名</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input type="text" formControlName="name">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="2">
+                <nz-form-item>
+                    <nz-form-label>停用</nz-form-label>
+                    <nz-form-control>
+                        <nz-switch formControlName="enable" nzCheckedChildren="啟" nzUnCheckedChildren="停"></nz-switch>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row style="text-align: center;">
+            <div nz-col nzSpan="24">
+                <button nz-button type="submit" class="btn blue-button" [disabled]="searchForm.invalid">搜尋</button>
+                <button nz-button type="button" class="btn btn-secondary" (click)="onReset()">重置</button>
+            </div>
+        </div>
+        <br>
+    </form>
+    <!-- 顯示列 -->
+    <nz-table ngSkipHydration nzTemplateMode *ngIf="dataList && dataList.length>0;else noData">
+        <thead>
+            <tr>
+                <th nzAlign="center">單位名稱</th>
+                <th nzAlign="center">帳號</th>
+                <th nzAlign="center">姓名</th>
+                <th nzAlign="center">停用</th>
+                <th nzAlign="center">編輯</th>
+            </tr>
+        </thead>
+
+        <tbody >
+            <tr *ngFor="let item of dataList">
+                <td nzAlign="center">{{item.unitName}} {{item.office}}</td>
+                <td nzAlign="center">{{item.account}}</td>
+                <td nzAlign="center">{{item.name}}</td>
+                <!-- <td nzAlign="center">{{item.enable}}</td> -->
+                <td nzAlign="center"><nz-switch [ngModel]="item.enable" nzCheckedChildren="啟" nzUnCheckedChildren="停"
+                        [nzDisabled]="true"></nz-switch></td>
+                <td nzAlign="center">
+                    <button nz-button class="btn blue-button" (click)="navigateToedit(item.id)">修改</button>
+                    <button nz-button class="btn" (click)="delete(item)">刪除</button>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+    <ng-template #noData>
+        <div class="nodata">
+            <p>目前無資料</p>
+        </div>
+    </ng-template>
+</div>
