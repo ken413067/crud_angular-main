@@ -17,14 +17,13 @@ export interface DataInterface {
   enable: boolean;
 }
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 //api串接邏輯
 export class DataService {
-
   private apiUrl = '/api/POC_angular';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getData(): Observable<DataInterface[]> {
     return this.http.get<DataInterface[]>(this.apiUrl);
@@ -38,10 +37,9 @@ export class DataService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   //取得目前帳號的id將目前輸入資料覆蓋至匹配的id上
-  editData(id:number,formData:DataInterface){
-    return this.http.put<DataInterface>(`${this.apiUrl}/${id}`,formData)
+  editData(id: number, formData: DataInterface) {
+    return this.http.put<DataInterface>(`${this.apiUrl}/${id}`, formData);
   }
-
 }
 
 // 更新資料

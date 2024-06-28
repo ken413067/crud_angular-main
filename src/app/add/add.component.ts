@@ -7,6 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { DataService, DataInterface } from '../data.service'; // 引入服務
 import { SharedModule } from '../ng-zorro-config'; //引入所有ngzorro套件
 import { AngularSharedModule } from '../angular-module'; //引用常用的angular組件
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-add',
@@ -36,7 +37,8 @@ export class AddComponent implements OnInit {
     private dataService: DataService,
     private router: Router,
     private route: ActivatedRoute,
-    private message: NzMessageService
+    private message: NzMessageService,
+    private searchComponent:SearchComponent
   ) {}
 
   // 初始化
@@ -71,20 +73,17 @@ export class AddComponent implements OnInit {
     if (this.addForm.valid && this.addtext === '新增') {
       this.dataService.addData(formData).subscribe((data) => {
         this.dataList.push(data);
-        this.addForm.reset();
         this.showModel('新增成功!!');
-        this.navigateToindex();
-        console.log('新增成功:', data);
+        // console.log('新增成功:', data);
       });
     } else if (this.addForm.valid && this.addtext === '儲存') {
-      console.log(this.idforedit);
       const id: number = this.idforedit;
       this.dataService.editData(id, formData).subscribe((data) => {
-        // this.dataList.push(data);
-        this.addForm.reset();
+        this.dataList.push(data);
+        // this.addForm.reset();
         this.showModel('修改成功!!');
-        this.navigateToindex();
-        console.log('修改成功:', data);
+        // console.log('修改成功:', data);
+
       });
     }
   }
@@ -108,7 +107,7 @@ export class AddComponent implements OnInit {
           system: matchdata.system,
           enable: matchdata.enable,
         });
-        console.log('成功拿到需要修改的資料', matchdata);
+        // console.log('成功拿到需要修改的資料', matchdata);
       } else {
         console.log('失敗');
       }
@@ -120,6 +119,7 @@ export class AddComponent implements OnInit {
   // 導航
   navigateToindex() {
     this.router.navigate(['./index']);
+    this.searchComponent.loadData()
   }
   //提示框相關
   showModel(Message: any) {
