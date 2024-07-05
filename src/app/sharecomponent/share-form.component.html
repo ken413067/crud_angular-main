@@ -1,0 +1,137 @@
+<div>
+    <div nz-row>
+        <div nz-col nzSpan="23" class="flex-add">
+            <button type="button" nz-button class="btn" (click)="navigateToindex()">返回查詢</button>
+        </div>
+    </div>
+    <form nz-form [formGroup]="addForm">
+        <!-- 單位及日期 -->
+        <div class="addFormcss">
+            <div nz-row>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>單位名稱</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <div nz-col nzSpan="24" class='flex-select'>
+                                <nz-select formControlName="unitName" nzPlaceHolder="縣市">
+                                    <nz-option *ngFor="let p of countyAndcity" [nzValue]="p" [nzLabel]="p"></nz-option>
+                                </nz-select>
+                                <nz-select formControlName="office" nzPlaceHolder="公所">
+                                    <nz-option *ngFor="let c of office" [nzValue]="c" [nzLabel]="c"></nz-option>
+                                </nz-select>
+                            </div>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>申請日期</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <nz-date-picker formControlName="filingDate"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div nz-row>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>帳號</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="text" formControlName="account">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>姓名</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="text" formControlName="name">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+
+            <div nz-row>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>身分證號</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="text" formControlName="idNumber">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>職稱</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="text" formControlName="jobTitle">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+
+            <div nz-row>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>連絡電話</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="number" formControlName="phone">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="2">
+                    <nz-form-label>Email</nz-form-label>
+                </div>
+                <div nz-col nzSpan="10">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <input nz-input type="email" formControlName="email">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <ng-content select="[extra-input]"></ng-content>
+        </div>
+        <!-- 勾選框 -->
+        <nz-table ngSkipHydration nzTemplateMode>
+            <thead>
+                <tr>
+                    <th nzAlign="center">勾選</th>
+                    <th nzAlign="center">系統別</th>
+                    <th nzAlign="center">使用權限</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td nzAlign="center"><input type="radio" formControlName="system" value="system1"></td>
+                    <td nzAlign="center">個案管理系統</td>
+                    <td nzAlign="center">系統管理者</td>
+                </tr>
+                <tr>
+                    <td nzAlign="center"><input type="radio" formControlName="system" value="system2"></td>
+                    <td nzAlign="center">個案管理系統</td>
+                    <td nzAlign="center">幹部管理</td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <ng-content select="[extra-button]"></ng-content>
+
+    </form>
+</div>

@@ -1,0 +1,20 @@
+<form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <app-share-form [addForm]="addForm" [addtext]="addtext" >
+        <div nz-row extra-input>
+            <div nz-col nzSpan="2">
+                <nz-form-label>帳號權限</nz-form-label>
+            </div>
+            <div nz-col nzSpan="10">
+                <nz-switch formControlName="enable" nzCheckedChildren="啟" nzUnCheckedChildren="停"></nz-switch>
+            </div>
+        </div>
+    </app-share-form>
+    <br>
+    <div nz-row style="text-align: center;" extra-button>
+        <div nz-col nzSpan="24">
+            <button nz-button type="submit" class="btn orange-button" [disabled]="addForm.invalid">{{addtext}}</button>
+            <button nz-button type="button" class="btn btn-secondary" (click)="addForm.reset()">清除</button>
+        </div>
+    </div>
+</form>
+<nz-divider></nz-divider>

@@ -38,8 +38,10 @@ export class SearchComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private searchService: SearchService
-  ) {}
+    private searchService: SearchService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   // 初始化
   ngOnInit(): void {
@@ -51,15 +53,25 @@ export class SearchComponent implements OnInit {
       enable: [true],
     });
     this.loadData();
-  }
+    //初始化導航列
+    this.route.queryParams.subscribe(params => {
+      this.searchForm.patchValue({
+        unitName: params['unitName'] || '',
+        office: params['office'] || '',
+        account: params['account'] || '',
+        name: params['name'] || '',
+        enable: params['enable'] !== undefined ? params['enable'] === 'true' : null
+      });
 
+    });
+  }
+  // 加載所有資料
   loadData(): void {
     this.dataService.getData().subscribe((data) => {
-      // this.dataList = data;
       this.allDataList = data;
     });
   }
-
+  // 搜尋結果
   searchSubmit(): void {
     const { unitName, office, account, name, enable } = this.searchForm.value;
     if (this.searchForm.valid) {
@@ -71,10 +83,16 @@ export class SearchComponent implements OnInit {
           (name ? item.name.includes(name) : true) &&
           (enable !== null ? item.enable === enable : true)
       );
-      this.searchService.changeDataList(this.dataList);
+      this.searchService.changeDataList(this.dataList);//推送這筆資料到各個訂閱者
+      this.router.navigate([], {
+        relativeTo: this.route, // 不會更新路由路徑，只會從當前路由後方更新參數
+        queryParams: { unitName, office, account, name, enable },
+        queryParamsHandling: 'merge' // 保留現有的查詢參數
+      });
+      // console.log(this.dataList)
     }
   }
-
+  // 刪除目前輸入
   onReset(): void {
     this.searchForm.reset({ enable: true });
     // this.http.get<any[]>('/api/POC_angular').subscribe(data => {

@@ -37,7 +37,7 @@ export class DataService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   //取得目前帳號的id將目前輸入資料覆蓋至匹配的id上
-  editData(id: number, formData: DataInterface) {
+  editData(id: string, formData: DataInterface):Observable<DataInterface> {
     return this.http.put<DataInterface>(`${this.apiUrl}/${id}`, formData);
   }
 }

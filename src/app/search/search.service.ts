@@ -16,5 +16,4 @@ export class SearchService {
   //   return this.currentDataList
   // }
 
-  constructor() {}
 }
