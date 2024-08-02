@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit {
         office: params['office'] || '',
         account: params['account'] || '',
         name: params['name'] || '',
-        enable: params['enable'] !== undefined ? params['enable'] === 'true' : null
+        enable: params['enable'] !== undefined ? params['enable'] === 'true' : true
       });
 
     });

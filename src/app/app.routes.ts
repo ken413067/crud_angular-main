@@ -5,6 +5,8 @@ import { SearchComponent } from './search/search.component';
 import {IndexComponent} from './index/index.component'
 import { EditComponent } from './edit/edit.component';
 import { ShareFormComponent } from './sharecomponent/share-form.component';
+import { LoginComponent } from './login/login.component';
+import { authGuard } from './login/auth.guard';
 
 export const routes: Routes = [
   //path: ""：指定空路徑，即當用戶訪問根URL（http://yourdomain/）時會匹配到這個路由。
@@ -14,8 +16,9 @@ export const routes: Routes = [
   { path: "home", component: WelcomeComponent },
   { path: "add", component: AddComponent },
   { path: "search", component: SearchComponent },
-  { path: "index", component: IndexComponent },
+  { path: "index", component: IndexComponent ,canActivate:[authGuard]},
   { path: "edit", component: EditComponent },
   { path: "share", component: ShareFormComponent },
+  { path: "login", component: LoginComponent },
 
 ];

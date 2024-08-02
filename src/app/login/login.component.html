@@ -1,0 +1,25 @@
+<div class="container">
+
+    <div class="content">
+        <nz-row>
+            <h1>POC專案測試</h1>
+        </nz-row>
+        <form [formGroup]="loginfrom" (ngSubmit)="onsubmit()">
+            <nz-row [nzGutter]="16">
+                <nz-form-label>帳號</nz-form-label>
+                <input nz-input type="text" formControlName="account">
+            </nz-row>
+            <nz-row nz-row [nzGutter]="16">
+                <nz-form-label>密碼</nz-form-label>
+                <input nz-input type="text" formControlName="password">
+            </nz-row>
+            <nz-row class="buttom-center">
+                <button nz-button class="btn orange-button" type="submit">登入</button>
+            </nz-row>
+        </form>
+        <nz-row class="buttom-center">
+            <button nz-button (click)="onlogout()">登出</button>
+        </nz-row>
+
+    </div>
+</div>

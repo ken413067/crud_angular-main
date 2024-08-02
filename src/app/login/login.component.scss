@@ -1,0 +1,23 @@
+@import url('../app.component.scss');
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.content {
+    margin-top: 50%;
+    margin-bottom: 50%;
+}
+
+nz-row {
+    margin: 20px;
+}
+
+.buttom-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

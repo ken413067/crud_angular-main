@@ -26,6 +26,7 @@ export class EditComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private shareFormComponent: ShareFormComponent,
+
     private route: ActivatedRoute,
     private searchService: SearchService,
 
@@ -59,6 +60,8 @@ export class EditComponent implements OnInit {
   }
   //修改表單
   onSubmit(): void {
+    console.log('123')
+
     const formData: DataInterface = this.addForm.value;
     if (this.addForm.valid) {
       const id: string = this.idforedit;
