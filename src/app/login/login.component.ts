@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AngularSharedModule } from '../angular-module'
 import { Loginserver, datainterface } from './login.server'
@@ -22,11 +22,12 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private loginserver: Loginserver,
+    private http: HttpClient,
 
   ) { }
   ngOnInit(): void {
     this.loginfrom = this.fb.group({
-      account: [''],
+      username: [''],
       password: ['']
     })
   }
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
     const logindata: datainterface = this.loginfrom.value
     if (logindata) {
       this.loginserver.pushdata(logindata).subscribe({
-        error: error => console.log(error),
+        error: error => console.log("123",error),
         complete: () => { this.router.navigate(['index']) }
       })
     }

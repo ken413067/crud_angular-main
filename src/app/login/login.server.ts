@@ -4,7 +4,7 @@ import { Observable, tap } from "rxjs";
 
 
 export interface datainterface {
-    account: string;
+    username: string;
     password: string;
 }
 
@@ -14,7 +14,7 @@ export interface datainterface {
 
 export class Loginserver {
     // 制定登陸的連線方式(需要改網址)
-    private apiUrl = '/api/POC_angular';
+    private apiUrl = 'http://localhost:8080/login';
     private secreKey = ''
 
     constructor(private http: HttpClient) { }
@@ -24,7 +24,7 @@ export class Loginserver {
             .pipe(
                 tap((response) => {
                     if (response) {
-                        localStorage.setItem('jwt_token', response)
+                        localStorage.setItem('jwt_token', response.jwt)
                     }
                 })
             )
@@ -35,7 +35,7 @@ export class Loginserver {
     }
     // 登出
     logout():void {
-        // console.log('已刪除')
+        console.log('已刪除')
         return localStorage.removeItem('jwt_token')
     }
     //驗證守衛
